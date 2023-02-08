@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+function lock_screen() {
+	# Open i3lock in background
+	"$script_dir/i3lock" &
+	i3lock_pid=$!
+	# Open eww windows after 0.5 second
+	sleep 0.5s
+	"$script_dir/eww" open
+	# Wait user to unlock
+	wait $i3lock_pid
+	# Close all eww windows
+	"$script_dir/eww" close
+	# Reset monitor
+	"$script_dir/../scripts/reload-monitor.sh"
+}
+
+function dim_screen() {
+	# Shut the screen
+	xset dpms force off
+}
+
+function suspend_machine() {
+	# Suspend machine
+	systemctl suspend
+}
+
+function print_help() {
+	echo "Useful functions for locking"
+	echo "Usage: $0 [function]"
+	echo "Functions:"
+	echo "    lock------Basic lock function, open i3lock and some eww windows."
+	echo "    dim-------Dim/Shut the screen, eww windows will be closed."
+	echo "    suspend---Suspend the machine."
+	echo "    recover---Recover from dim, reopen eww windows."
+}
+
+case $1 in
+"lock")
+	lock_screen
+	;;
+"dim")
+	dim_screen
+	;;
+"suspend")
+	suspend_machine
+	;;
+*)
+	print_help
+	;;
+esac

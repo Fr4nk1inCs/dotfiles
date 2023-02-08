@@ -1,0 +1,16 @@
+* {
+  all: unset;
+}
+window {
+  background-color: unset;
+  color: #ffd5cd;
+}
+
+.genwin {
+  background-color: #2e3440;
+  border-radius: 16px;
+}
+
+@import "./weather/eww.scss";
+@import "./spotify/eww.scss";
+@import "./calendar/eww.scss";

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cache_dir="$HOME/.cache/eww/lock/spotify"
+
+cache_cover_path=$cache_dir/cover.png
+
+export cache_cover_path

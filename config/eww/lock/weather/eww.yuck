@@ -1,0 +1,91 @@
+;; Variables
+(defpoll weather-icon
+    :interval "15m"
+    "lock/weather/scripts/get-weather-info --icon"
+)
+(defpoll weather-description
+    :interval "15m"
+    "lock/weather/scripts/get-weather-info --description"
+)
+(defpoll weather-temperature
+    :interval "15m"
+    "lock/weather/scripts/get-weather-info --temperature"
+)
+(defpoll weather-icon-color
+    :interval "15m"
+    "lock/weather/scripts/get-weather-info --color"
+)
+(defpoll weather-quote
+    :interval "15m"
+    "lock/weather/scripts/get-weather-info --quote"
+)
+(defpoll weather-hint
+    :interval "15m"
+    "lock/weather/scripts/get-weather-info --hint"
+)
+
+;; Widget
+(defwidget weather []
+    (box
+        :class "weather-main"
+        (box
+            :orientation "v"
+            :spacing 0
+            :space-evenly "false"
+            :vexpand "false"
+            :hexpand "false"
+            (box
+                :orientation "h"
+                :spacing 0
+                :space-evenly "true"
+                :vexpand "false"
+                :hexpand "false"
+                (label
+                    :class "weather-temperature"
+                    :halign "start"
+                    :text weather-temperature
+                )
+                (label
+                    :class "weather-icon"
+                    :style "color: ${weather-icon-color};"
+                    :text weather-icon
+                )
+            )
+            (box
+                :orientation "h"
+                :spacing 0
+                :vexpand "false"
+                :hexpand "false"
+                (label
+                    :class "weather-description"
+                    :halign "start"
+                    :text weather-description
+                )
+            )
+            (box
+                :orientation "h"
+                :spacing 0
+                :vexpand "false"
+                :hexpand "false"
+                (label
+                    :class "weather-hint"
+                    :halign "start"
+                    :text weather-hint
+                )
+            )
+        )
+    )
+)
+
+;; Window
+(defwindow lock-weather
+    :stacking "fg"
+    :focusable "false"
+    :geometry (geometry
+        :x "60px"
+        :y "20px"
+        :width 300
+        :height 100
+    )
+    (weather)
+)

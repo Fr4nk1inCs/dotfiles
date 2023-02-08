@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "$script_dir/config"
+
+if ((return_code & lock_mask)); then
+	echoerr "i3lock-color not installed, skipping opening i3lock screen"
+	exit 1
+fi
+
+$lock_exec --nofork --pass-media-key --pass-screen-key --pass-power-key \
+	--color="$bg_color" --force-clock \
+	--time-pos="$time_position" --date-pos="$date_position" \
+	--time-color="$text_color" --date-color="$text_color" \
+	--time-str="$time_format" --date-str="$date_format" \
+	--time-size="$time_size" --date-size="$date_size" \
+	--time-font="$time_font" --date-font="$date_font" \
+	--indicator --line-uses-inside --ind-pos="$indicator_position" \
+	--inside-color="$inside_color" --insidewrong-color="$wrong_color" \
+	--insidever-color="$inside_color" \
+	--ring-color="$ring_color" --ringwrong-color="$wrong_color" \
+	--ringver-color="$verify_ring_color" \
+	--keyhl-color="$highlight_color" --bshl-color="$highlight_color" \
+	--separator-color="$separator_color" \
+	--radius="$ring_radius" --ring-width="$ring_width" \
+	--verif-text="$verify_text" --wrong-text="$wrong_text" \
+	--noinput-text="$noinput_text" \
+	--greeter-pos="$greeter_position" --greeter-text="$greeter_text" \
+	--greeter-size="$greeter_size" --greeter-font="$greeter_font" \
+	--greeter-color="$text_color"

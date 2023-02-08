@@ -1,0 +1,4 @@
+set sandbox none
+set synctex true
+set synctex-editor-command "nvr --remote-silent %f -c %l"
+map <C-i> recolor

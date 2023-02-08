@@ -1,0 +1,9 @@
+#!/bin/sh
+
+event=$(khal list -a "Treball" today 5d --day-format "{date-long} {name}" --format "{start-time} ~ {end-time}\t{title}@{location}")
+
+if [ -n "$event" ]; then
+	echo "$event"
+else
+	echo "No events"
+fi

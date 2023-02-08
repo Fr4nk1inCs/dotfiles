@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "${script_dir}/config"
+
+if [ ! -d "$cache_dir" ]; then
+	mkdir -p "$cache_dir"
+fi
+
+if art_url="$(playerctl metadata mpris:artUrl)"; then
+	curl -s "$art_url" --output "$cache_cover_path"
+	convert "$cache_cover_path" -resize 150x150 "$cache_cover_path"
+	exit 0
+else
+	exit 1
+fi

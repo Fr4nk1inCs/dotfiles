@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "$script_dir/config"
+
+if ! "$script_dir/download_cover" >/dev/null 2>&1; then
+	echo "$cache_cover_path"
+else
+	echo "$script_dir/image.png"
+fi

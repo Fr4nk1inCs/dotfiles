@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "$script_dir/config"
+
+if ((return_code & eww_mask)); then
+	echoerr "eww not installed, skipping opening eww lock widgets."
+	exit 1
+fi
+
+# open eww widgets
+if [[ $1 == "open" ]]; then
+	echoinfo "Opening eww windows"
+	# shellcheck disable=SC2086
+	$eww_exec open-many $eww_windows
+elif [[ $1 == "close" ]]; then
+	echoinfo "Closing eww windows"
+	$eww_exec close-all
+else
+	echoerr "Invalid argument: $1, expected 'open' or 'close'"
+fi

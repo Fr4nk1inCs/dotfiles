@@ -1,0 +1,91 @@
+;; Variables
+(defpoll music-title 
+    :interval "5s"  
+    "[ $(ps h -C spotify | wc -l) != 0 ] && playerctl --player=spotify metadata --format '	{{ title }}'"
+)
+(defpoll music-artist 
+    :interval "5s"  
+    "[ $(ps h -C spotify | wc -l) != 0 ] && playerctl --player=spotify metadata --format '	{{ artist }}'"
+)
+(defpoll music-album 
+    :interval "5s"  
+    "[ $(ps h -C spotify | wc -l) != 0 ] && playerctl --player=spotify metadata --format '	{{ album }}'"
+)
+(defpoll cover-path 
+    :interval "5s"  
+    "[ $(ps h -C spotify | wc -l) != 0 ] && lock/spotify/scripts/get-cover-path"
+)
+
+;; (defpoll music
+;;     :interval "5s"  
+;;     "[ $(ps h -C spotify | wc -l) != 0 ] && playerctl --player=spotify metadata --format '{{ artist }} - {{ title }}'"
+;; )
+;; (defpoll volume 
+;;     :interval "3ms"  
+;;     "~/.config/eww/scripts/getvol"
+;; )
+;; (defpoll bright 
+;;     :interval "1ms"  
+;;     "~/.config/eww/scripts/getbri"
+;; )
+;; (defpoll musicstat 
+;;     :interval "1s"  
+;;     "~/bin/spotifystatus"
+;; )
+
+;; Widget
+(defwidget spotify []
+    (box
+        :orientation "h"
+        :space-evenly "false"
+        (box
+            :class "music-cover"
+            :style "background-image: url('${cover-path}');"
+            ""
+        )
+        (box
+            :orientation "v"
+            :space-evenly "false"
+            (box
+                :halign "start"
+                :class "music-info"
+                music-title
+            )
+            (box
+                :halign "start"
+                :class "music-info"
+                music-artist
+            )
+            (box
+                :halign "start"
+                :class "music-info"
+                music-album
+            )
+            ;; (box
+            ;;     :halign "start"
+            ;;     :orientation "h"
+            ;;     :class "volume"
+            ;;     :space-evenly "false"
+            ;;     (scale
+            ;;         :min 0
+            ;;         :max 101
+            ;;         :value volume
+            ;;         :onchange "amixer -D pulse sset Master {}%"
+            ;;     )
+            ;; )
+        )
+    )
+)
+
+;; Window
+(defwindow lock-spotify 
+    :screen 0
+    :geometry (geometry 
+        :x "40px" 
+        :y "-40px" 
+        :width "600px" 
+        :height "150px" 
+        :anchor "left bottom"
+    )
+    (spotify)
+)

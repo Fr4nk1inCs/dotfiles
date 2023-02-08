@@ -1,0 +1,34 @@
+.weather-main {
+  background-color: unset;
+}
+
+.weather-icon {
+  font-family: FiraCode Nerd Font;
+  font-size: 120px;
+  font-weight: normal;
+  margin: 15px 0px 0px 30px;
+  margin: 0;
+}
+
+.weather-temperature {
+  color: #ebcb8b;
+  font-family: "Comic Sans MS";
+  font-size: 60px;
+  font-weight: bold;
+  margin: -15px 30px 0px 0px;
+  margin: 0;
+}
+
+.weather-description {
+  color: #e5e9f0;
+  font-family: "Comic Sans MS";
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.weather-hint {
+  color: #e5e9f0;
+  font-family: "Comic Sans MS";
+  font-size: 24px;
+  font-weight: bold;
+}

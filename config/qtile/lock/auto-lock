@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "$script_dir/config"
+
+pkill --full "$auto_lock_exec"
+
+if ((return_code & xautolock_mask)); then
+	echoerr "xidlehook & xautolock not installed, skipping auto-lock."
+	exit 1
+elif ((return_code & xidlehook_mask)); then
+	echoinfo "xidlehook not installed, using xautolock"
+	auto_lock_exec -time $auto_lock_time -locker "$script_dir/manual-lock"
+else
+	echoinfo "xidlehook found, using xidlehook"
+	$auto_lock_exec \
+		--not-when-fullscreen \
+		--timer $auto_lock_time \
+		"$script_dir/locker lock" \
+		"$script_dir/auto-lock" \
+		--timer $dim_time \
+		"$script_dir/locker dim" \
+		"" \
+		--timer $suspend_time \
+		"$script_dir/locker suspend" \
+		""
+fi

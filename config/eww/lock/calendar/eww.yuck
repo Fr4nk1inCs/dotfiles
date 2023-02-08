@@ -1,0 +1,56 @@
+;; Variables
+(defpoll cal-personal
+    :interval "1s"  
+    "lock/calendar/scripts/cal-personal"
+)
+(defpoll cal-work
+    :interval "1s"  
+    "lock/calendar/scripts/cal-work"
+)
+
+;; Widget
+(defwidget calendari []
+    (box 
+        :orientation "v"
+        :space-evenly "false"
+        :valign "end"
+        (box
+            :class "cal-name"
+            :halign "start"
+            "  Personal"
+        )
+        (box 
+            :class "events"
+            :orientation "h"
+            :space-evenly "true"
+            :halign "start"
+            cal-personal
+        )
+        (box
+            :class "cal-name"
+            :halign "start"
+            "  Work & Study"
+        )
+        (box 
+            :class "events"
+            :orientation "h"
+            :space-evenly "true"
+            :halign "start"
+            cal-work 
+        )
+    )
+)
+
+;; Window
+(defwindow lock-calendar 
+    :screen 0
+    :geometry (geometry 
+        :x "-40px" 
+        :y "-40px" 
+        :width "400px" 
+        :height "150px" 
+        :anchor "right bottom"
+    )
+	(calendari)
+)
+

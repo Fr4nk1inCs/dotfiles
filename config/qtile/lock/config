@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+export script_dir
+
+echoerr() {
+	echo "$(tput setaf 1)ERROR:" "$(tput sgr0)$*" 1>&2
+}
+
+echoinfo() {
+	echo "$(tput setaf 4)INFO:" "$(tput sgr0)$*"
+}
+export echoerr echoinfo
+
+return_code=0
+lock_mask=1
+eww_mask=2
+xidlehook_mask=4
+xautolock_mask=8
+
+# Check if i3lock-color is installed
+if ! lock_exec=$(which i3lock); then
+	return_code=$((return_code | lock_mask))
+else
+	# Colors
+	bg_color=2e34407f
+	text_color=e5e9f0ef        #e5e9f0 text (time/date/greeter) color
+	ring_color=e5e9f0ef        #e5e9f0 ring/inside initial color
+	wrong_color=bf616aaa       #bf616a ring/inside color when password is wrong
+	highlight_color=3b4252ff   #3b4252 ring highlight color when key/backspace is pressed
+	verify_ring_color=a3be8cff #a3be8c ring color when verifying password
+	inside_color=4c566a66      #4c566a inside color
+	separator_color=e5e9f000   #e5e9f0 separator color, transparent
+
+	# Text: time/date/greeter/verify/wrong/noinput
+	time_format="%H:%M"        # Format for time, "hh:mm"
+	time_size=120              # Size in pixels for time
+	time_font="SF Pro Display" # Font for time
+
+	date_format="%x %A"     # Format for date, "mm/dd/yyyy xxxxday" "yyyy年mm月dd日 星期x"
+	date_size=35            # Size in pixels for date
+	date_font="PingFang SC" # Font for date
+
+	greeter_text="Enter password to unlock" # Text for greeter
+	greeter_size=20                         # Size in pixels for greeter, width 204px
+	greeter_font="SF Pro Display"           # Font for greeter
+
+	verify_text="" # Do not show verify text
+
+	wrong_text="" # Do not show wrong text
+
+	noinput_text="" # Do not show noinput text
+
+	# Positions and sizes
+	ring_radius=7
+	ring_width=3
+	indicator_position="x+w/2-105:y+7*h/9"
+	time_position="x+w/2:y+2*h/9"
+	date_position="tx:ty+60"
+	greeter_position="ix+123:iy+7"
+
+	export bg_color lock_exec bg_image text_color ring_color wrong_color \
+		highlight_color verify_ring_color inside_color separator_color \
+		time_format time_size time_font date_format date_size date_font \
+		greeter_text greeter_size greeter_font verify_text wrong_text \
+		noinput_text ring_radius ring_width indicator_position time_position \
+		date_position greeter_position
+fi
+
+# Check if eww is installed
+if ! eww_exec=$(which eww); then
+	return_code=$((return_code | eww_mask))
+else
+	# Define lock eww windows
+	eww_windows="lock-weather lock-spotify lock-calendar"
+	export eww_exec eww_windows
+fi
+
+# Check if xidlehook is installed
+if ! auto_lock_exec=$(which xidlehook); then
+	# Use xautolock as an alternative
+	if ! auto_lock_exec=$(which xautolock); then
+		return_code=$((return_code | xidlehook_mask | xautolock_mask))
+	else
+		return_code=$((return_code | xidlehook_mask))
+
+		auto_lock_time=10 # Time in minutes to lock automatically
+		export auto_lock_time
+	fi
+else
+	auto_lock_time=600 # Time in seconds to lock automatically
+	export auto_lock_exec auto_lock_time dim_time suspend_time
+fi
+
+dim_time=300      # Time in seconds to dim screen after auto-locked
+suspend_time=2700 # Time in seconds to suspend after dim
+
+export return_code lock_mask eww_mask xidlehook_mask xautolock_mask
