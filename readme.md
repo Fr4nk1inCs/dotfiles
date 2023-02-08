@@ -1,7 +1,6 @@
 # My Dotfiles
 
 ```plaintext
-Pictures/*   -> ~/Pictures/*
 config/*     -> ~/.config/*
 local/*      -> ~/.local/*
 clang-format -> ~/.clang-format
@@ -18,10 +17,6 @@ zshrc        -> ~/.zshrc
 ```bash
 git clone https://github.com/Fr4nk1in-USTC/dotfiles.git
 cd dotfiles
-
-# Copy the wallpaper
-# (optional if you have one, just move it to `~/Pictures/Wallpapers/background.jpg`)
-cp -r Pictures/* ~/Pictures/
 
 # Copy the configuration files you need.
 cp -r config/* ~/.config/
