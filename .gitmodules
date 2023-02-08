@@ -1,3 +1,0 @@
-[submodule "config/nvim"]
-	path = config/nvim
-	url = https://github.com/Fr4nk1in-USTC/dot-nvim.git
