@@ -1,7 +1,6 @@
 # My Dotfiles
 
 ```plaintext
-Pictures/*   -> ~/Pictures/*
 config/*     -> ~/.config/*
 local/*      -> ~/.local/*
 fonts/*      -> ~/.fonts/*      # Only *.ttf and *.otf needed
@@ -24,10 +23,6 @@ cd dotfiles
 cp fonts/Feather.ttf ~/.fonts/
 cp fonts/SFMono-Nerd-Font-Ligaturized/*.otf ~/.fonts/
 fc-cache -fv
-
-# Copy the wallpaper
-# (optional if you have one, just move it to `~/Pictures/Wallpapers/background.jpg`)
-cp -r Pictures/* ~/Pictures/
 
 # Copy the configuration files you need.
 cp -r config/* ~/.config/
