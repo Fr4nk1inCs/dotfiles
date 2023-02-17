@@ -4,8 +4,9 @@
 Pictures/*   -> ~/Pictures/*
 config/*     -> ~/.config/*
 local/*      -> ~/.local/*
+fonts/*      -> ~/.fonts/*      # Only *.ttf and *.otf needed
 clang-format -> ~/.clang-format
-zimrc        -> ~/.zimrc         # Not sure how it works
+zimrc        -> ~/.zimrc        # Not sure how it works
 zshrc        -> ~/.zshrc
 ```
 
@@ -18,6 +19,11 @@ zshrc        -> ~/.zshrc
 ```bash
 git clone https://github.com/Fr4nk1in-USTC/dotfiles.git
 cd dotfiles
+
+# Install fonts first
+cp fonts/Feather.ttf ~/.fonts/
+cp fonts/SFMono-Nerd-Font-Ligaturized/*.otf ~/.fonts/
+fc-cache -fv
 
 # Copy the wallpaper
 # (optional if you have one, just move it to `~/Pictures/Wallpapers/background.jpg`)
