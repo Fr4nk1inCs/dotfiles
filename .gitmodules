@@ -1,6 +1,3 @@
-[submodule "config/nvim"]
-	path = config/nvim
-	url = https://github.com/Fr4nk1in-USTC/dot-nvim.git
 [submodule "fonts/SFMono-Nerd-Font-Ligaturized"]
 	path = fonts/SFMono-Nerd-Font-Ligaturized
 	url = https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
