@@ -1,0 +1,202 @@
+{
+  "layer": "top", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  "height": 25, // Waybar height (to be removed for auto height)
+  "spacing": 0, // Gaps between modules (4px)
+  "margin": "5 5 0 5",
+  // Choose the order of the modules
+  "modules-left": [
+    "custom/rofi",
+    "custom/dunst",
+    "custom/chrome",
+    "custom/file",
+    "custom/setting",
+    "custom/spotify",
+    "hyprland/window"
+  ],
+  "modules-center": ["wlr/workspaces"],
+  "modules-right": [
+    "tray",
+    "network",
+    "bluetooth",
+    "cpu",
+    "memory",
+    "temperature",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "clock"
+  ],
+  "custom/rofi": {
+    "format": "<span font='feather'>{icon}</span>",
+    "format-icons": "",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/rofi.sh",
+    "on-click": "rofi -show drun -theme launchpad",
+    "tooltip": true
+  },
+  "custom/dunst": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/dunst.sh",
+    "on-click": "dunstctl set-paused toggle",
+    "tooltip": true,
+    "restart-interval": 1
+  },
+  "custom/chrome": {
+    "format": "<span font='feather'>{icon}</span>",
+    "format-icons": "",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/chrome.sh",
+    "on-click": "google-chrome-stable",
+    "tooltip": true
+  },
+  "custom/file": {
+    "format": "<span font='feather'>{icon}</span>",
+    "format-icons": "",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/file.sh",
+    "on-click": "thunar",
+    "tooltip": true
+  },
+  "custom/setting": {
+    "format": "<span font='feather'>{icon}</span>",
+    "format-icons": "",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/setting.sh",
+    "on-click": "gnome-control-center network",
+    "tooltip": true
+  },
+  "custom/spotify": {
+    "format": "{}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 40,
+    "on-click": "playerctl -p spotify play-pause",
+    "on-click-right": "killall spotify",
+    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "on-scroll-up": "playerctl -p spotify next",
+    "on-scroll-down": "playerctl -p spotify previous",
+    "exec": "$HOME/.config/waybar/scripts/spotify.py 2> /dev/null", // Script in resources/custom_modules folder
+    "exec-if": "pgrep spotify"
+  },
+  "wlr/workspaces": {
+    "format": "<span font='feather'>{icon}</span><sub>{name}</sub>",
+    "on-click": "activate",
+    "active-only": false,
+    "all-outputs": true,
+    "format-icons": {
+      "7": "",
+      "8": "",
+      "9": "",
+      "10": "",
+      "urgent": "",
+      "default": ""
+    },
+    "sort-by-number": true
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 10
+  },
+  "clock": {
+    "locale": "en_US.UTF-8",
+    "format": "{:%H:%M}",
+    "format-alt": "{:%Y-%m-%d}",
+    "tooltip-format": "<big>{:%A, %B %d, %Y}</big>\n{calendar}",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "action": {
+      "on-click-right": "mode"
+    }
+  },
+  "cpu": {
+    "format": "{icon} {usage}%",
+    "format-icons": "󰍛",
+    "interval": 5,
+    "tooltip": true
+  },
+  "memory": {
+    "format": "{icon} {used:0.1f}G",
+    "format-icons": ["󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+    "interval": 10,
+    "tooltip": true,
+    "tooltip-format": "{used:0.1f}G / {total:0.1f}G = {percentage}%"
+  },
+  "temperature": {
+    "thermal-zone": 1,
+    "critical-threshold": 70,
+    "interval": 5,
+    "format": "{icon}<span size='6pt'> </span>{temperatureC}°C",
+    "format-icons": ["󰜗", "󱃃", "󰔏", "󱃂", "󱗗"]
+  },
+  "battery": {
+    "states": {
+      "good": 90,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}<span size='6pt'> </span>{capacity}%",
+    "format-charging": "󰂄<span size='6pt'> </span>{capacity}%",
+    "format-plugged": "ﮣ<span size='6pt'> </span>{capacity}%",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+  "network": {
+    "interval": 3,
+    "format": "{ifname}",
+    "format-wifi": "{icon} ",
+    "format-ethernet": "󰈁",
+    "format-disconnected": "󰤫 ",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "on-click": "gnome-control-center network",
+    "tooltip": true,
+    "tooltip-format": "{ifname} {ipaddr}/{cidr} 󰇚 {bandwidthDownBytes} 󰕒 {bandwidthUpBytes}",
+    "tooltip-format-wifi": "{ifname} {ipaddr}/{cidr} {essid}({signalStrength}%) 󰇚 {bandwidthDownBytes} 󰕒 {bandwidthUpBytes}"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "󰥰 {volume}%",
+    "format-muted": "󰝟 {volume}%",
+    "format-icons": {
+      "hdmi": "󰡁",
+      "headphone": "󰋋",
+      "hands-free": "󰋋",
+      "headset": "󰋎",
+      "phone": "󰄜",
+      "portable": "󰏲",
+      "car": "󰄋",
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "tooltip": true,
+    "tooltip-format": "Device: {desc}\nVolume: {volume}%",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "pavucontrol"
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩒", "󱩔", "󱩔", "󱩖", "󰛨"]
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-on": "󰂯",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱<span size='3pt'> </span><span size='8pt' baseline_shift='3pt'>{num_connections}</span>",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "blueberry"
+  }
+}
