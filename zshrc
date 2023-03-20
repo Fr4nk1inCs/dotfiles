@@ -38,7 +38,11 @@ bindkey '^[OB' history-substring-search-down
 
 # Environment
 # export MOAR='--statusbar=bold --no-linenumbers'
-# export PAGER="moar"
+export MANPAGER="nvim +Man!"
+export PAGER="nvimpager"
+
+# personal alias
+alias :q='exit'
 
 # exa alias
 alias ls='exa --icons --git'
@@ -55,6 +59,7 @@ alias nv='nvim'
 alias v='nvim'
 alias vc='cd ~/.config/nvim && nvim'
 alias qt='cd ~/.config/qtile && nvim'
+alias hy='cd ~/.config/hypr && nvim'
 
 # neofetch alias
 alias n='neofetch'
@@ -70,6 +75,10 @@ fi
 source ~/.ssh/ssh-find-agent.sh
 set_ssh_agent_socket
 
+# Bilibili Danmaku
+alias bili="cd $HOME/.config/bili; $HOME/.local/bin/bili; cd -"
+
+# nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -77,5 +86,14 @@ export NVM_DIR="$HOME/.nvm"
 # autojump
 [[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
 
+# Load RVM into a shell session *as a function*
+function __rvm_load() {
+  unalias rvm
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 2>/dev/null
+  rvm $@
+}
+alias rvm=__rvm_load
+
 # starship
 eval "$(starship init zsh)"
+
