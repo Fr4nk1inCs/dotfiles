@@ -26,7 +26,7 @@ window {
 
 #custom-rofi,
 #custom-dunst,
-#custom-chrome,
+#custom-browser,
 #custom-file,
 #custom-setting,
 #custom-spotify,
@@ -47,7 +47,7 @@ window {
 
 #custom-rofi,
 #custom-dunst,
-#custom-chrome,
+#custom-browser,
 #custom-file,
 #custom-setting,
 #custom-spotify,
@@ -112,6 +112,10 @@ window {
 }
 
 #battery.charging {
+  color: @green;
+}
+
+#battery.plugged {
   color: @green;
 }
 
