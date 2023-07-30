@@ -6,6 +6,7 @@ full_screen() {
 	grim "$pic_path" &&
 		wl-copy -t image/png <"$pic_path" &&
 		notify-send \
+			--icon="$pic_path" \
 			--urgency=low \
 			--app-name="Screenshot" \
 			"Screenshot taken, saved to $pic_path"
@@ -24,6 +25,7 @@ rec_or_win() {
 	grim -g "$window_selection" "$pic_path" &&
 		wl-copy -t image/png <"$pic_path" &&
 		notify-send \
+			--icon="$pic_path" \
 			--urgency=low \
 			--app-name="Screenshot" \
 			"Screenshot taken, saved to $pic_path"

@@ -10,6 +10,9 @@ show_milliseconds = false
 disabled = false
 style = "bold italic red"
 
+[username]
+show_always = true
+
 [aws]
 symbol = "  "
 
