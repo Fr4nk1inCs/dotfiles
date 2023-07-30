@@ -11,6 +11,9 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
 
+# interactive comment
+setopt interactivecomments
+
 # Zim configuration
 # Set where the directory used by Zim will be located.
 ZIM_HOME=~/.zim
@@ -72,11 +75,40 @@ if [[ $TERM = "xterm-kitty" ]]; then
     alias s='kitty +kitten ssh'
     alias ssh='kitty +kitten ssh'
 fi
-source ~/.ssh/ssh-find-agent.sh
-set_ssh_agent_socket
 
-# Bilibili Danmaku
-alias bili="cd $HOME/.config/bili; $HOME/.local/bin/bili; cd -"
+# bilibili danmuku
+alias bili='bili-live-chat -d 23647637'
+
+# fzf settings
+export RUNEWIDTH_EASTASIAN=0
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
+--color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
+--color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B
+--scrollbar="█"
+"
+
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
+export LESSOPEN='|~/.lessfilter %s'
+
+
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
+
+zstyle ':fzf-tab:complete:systemctl-*:*'            fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-log:*'                fzf-preview 'git log --color=always $word'
+zstyle ':fzf-tab:complete:git-help:*'               fzf-preview 'git help $word | bat -plman --color=always'
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+	'case "$group" in
+	"commit tag") git show --color=always $word ;;
+	*) git show --color=always $word | delta ;;
+	esac'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+	'case "$group" in
+	"modified file") git diff $word | delta ;;
+	"recent commit object name") git show --color=always $word | delta ;;
+	*) git log --color=always $word ;;
+	esac'
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -94,6 +126,28 @@ function __rvm_load() {
 }
 alias rvm=__rvm_load
 
+# direnv
+eval "$(direnv hook zsh)"
+
 # starship
 eval "$(starship init zsh)"
 
+# Qwik editor
+export LAUNCH_EDITOR="$HOME/.local/bin/qwik_open.sh"
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+export MAMBA_EXE="/usr/bin/micromamba";
+export MAMBA_ROOT_PREFIX="/home/fushen/micromamba";
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    if [ -f "/home/fushen/micromamba/etc/profile.d/micromamba.sh" ]; then
+        . "/home/fushen/micromamba/etc/profile.d/micromamba.sh"
+    else
+        export  PATH="/home/fushen/micromamba/bin:$PATH"  # extra space after export prevents interference from conda init
+    fi
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
