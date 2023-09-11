@@ -42,7 +42,7 @@ bindkey '^[OB' history-substring-search-down
 # Environment
 # export MOAR='--statusbar=bold --no-linenumbers'
 export MANPAGER="nvim +Man!"
-export PAGER="nvimpager"
+export PAGER="less"
 
 # personal alias
 alias :q='exit'
@@ -125,9 +125,6 @@ function __rvm_load() {
   rvm $@
 }
 alias rvm=__rvm_load
-
-# direnv
-eval "$(direnv hook zsh)"
 
 # starship
 eval "$(starship init zsh)"
