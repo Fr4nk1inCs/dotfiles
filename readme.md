@@ -16,7 +16,7 @@ zshrc        -> ~/.zshrc
 ## Installation
 
 ```bash
-git clone https://github.com/Fr4nk1in-USTC/dotfiles.git
+git clone https://github.com/Fr4nk1inCs/dotfiles.git
 cd dotfiles
 
 # Install fonts first
