@@ -47,11 +47,11 @@ export PAGER="less"
 # personal alias
 alias :q='exit'
 
-# exa alias
-alias ls='exa --icons --git'
-alias la='exa -a --icons --git'
-alias ll='exa -al --icons --git'
-alias tree='exa -T --icons --git'
+# eza alias
+alias ls='eza --icons --git'
+alias la='eza -a --icons --git'
+alias ll='eza -al --icons --git'
+alias tree='eza -T --icons --git'
 
 # dust alias
 alias du='dust'
@@ -110,27 +110,14 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 	*) git log --color=always $word ;;
 	esac'
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# autojump
-[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
-
-# Load RVM into a shell session *as a function*
-function __rvm_load() {
-  unalias rvm
-  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 2>/dev/null
-  rvm $@
-}
-alias rvm=__rvm_load
-
 # starship
 eval "$(starship init zsh)"
 
-# Qwik editor
-export LAUNCH_EDITOR="$HOME/.local/bin/qwik_open.sh"
+# zoxide
+eval "$(zoxide init zsh)"
+
+# fzf
+eval "$(fzf --zsh)"
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!

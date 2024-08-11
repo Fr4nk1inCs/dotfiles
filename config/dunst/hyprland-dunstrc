@@ -12,7 +12,7 @@
     width = 300
     # height = 260
     origin = top-right
-    offset = 10x40
+    offset = 5x5
 
     progress_bar = true
     progress_bar_height = 5

@@ -9,7 +9,7 @@ case "$1" in
 	exe="kitty"
 	;;
 "file")
-	exe="thunar"
+	exe="nautilus"
 	;;
 *)
 	echo "Usage: $0 {term|file}"
@@ -23,7 +23,7 @@ esac
 
 if [[ -z $(echo "$workspaces" | jq -r ".[] | select(.name == \"special:$1\")") ]]; then
 	hyprctl dispatch exec "[workspace special:$1] $exe" &&
-		sleep 0.4s &&
+		sleep 1s &&
 		hyprctl dispatch togglespecialworkspace "$1"
 else
 	hyprctl dispatch togglespecialworkspace "$1"

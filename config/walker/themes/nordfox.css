@@ -1,0 +1,119 @@
+/* Nordfox Colors */
+@define-color bg #2e3440;
+@define-color fg #cdcecf;
+@define-color sel #3e4a5b;
+@define-color black #3b4252;
+@define-color white #e5e9f0;
+@define-color red #bf616a;
+@define-color orange #c9826b;
+@define-color yellow #ebcb8b;
+@define-color green #a3be8c;
+@define-color magenta #b48ead;
+@define-color blue #81a1c1;
+@define-color cyan #88c0d0;
+@define-color pink #bf88bc;
+
+* {
+  all: unset;
+}
+
+* {
+  font-family: "Maple Mono NF CN";
+  color: @fg;
+  box-shadow: none;
+}
+
+#window {
+  background: none;
+  opacity: 0.8;
+  border-radius: 7.5px;
+}
+
+#box {
+  background: @bg;
+  border: 2.5px solid @blue;
+  border-radius: 7.5px;
+}
+
+#search {
+  padding: 15px;
+  background: @bg;
+  border-radius: 7.5px 7.5px 0 0;
+}
+
+#password,
+#input,
+#typeahead {
+  background: @sel;
+
+  border-radius: 7.5px;
+
+  padding: 5px;
+}
+
+#input > *:first-child,
+#typehead > *:first-child {
+  margin-right: 5px;
+}
+
+#spinner {
+}
+
+#typeahead {
+  background: none;
+  opacity: 0.5;
+}
+
+#input placeholder {
+  opacity: 0.5;
+}
+
+#list {
+  background: @bg;
+}
+
+child {
+  margin-top: 0;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+child:selected {
+  background: @sel;
+  border-radius: 7.5px;
+}
+
+#item {
+  border-radius: 7.5px;
+  padding: 5px;
+}
+
+#icon {
+  padding-right: 10px;
+}
+
+#textwrapper {
+}
+
+#label {
+}
+
+#sub {
+  opacity: 0.5;
+}
+
+#activationlabel {
+  opacity: 0.5;
+}
+
+.activation #activationlabel {
+  opacity: 1;
+  color: @blue;
+}
+
+.activation #textwrapper,
+.activation #icon,
+.activation #search {
+  opacity: 0.5;
+}

@@ -1,106 +1,89 @@
-/* Nord Colors */
-@define-color black #2e3440;
+/* Nordfox Colors */
 @define-color bg #2e3440;
-@define-color grey #4c566a;
+@define-color fg #cdcecf;
+@define-color sel #3e4a5b;
+@define-color black #3b4252;
 @define-color white #e5e9f0;
 @define-color red #bf616a;
-@define-color orange #d08770;
+@define-color orange #c9826b;
 @define-color yellow #ebcb8b;
 @define-color green #a3be8c;
-@define-color purple #b48ead;
+@define-color magenta #b48ead;
 @define-color blue #81a1c1;
-@define-color cyan #8fbcbb;
-@define-color aqua #88c0d0;
-@define-color navy #5e81ac;
+@define-color cyan #88c0d0;
+@define-color pink #bf88bc;
 
 /* Fonts */
 * {
-  font-family: "Mononoki Nerd Font";
-  font-size: 14px;
-  color: @white;
+  font-family: "Maple Mono NF CN";
+  font-size: 12px;
 }
 
 window {
-  background-color: rgba(46, 52, 64, 0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
-#custom-rofi,
-#custom-dunst,
-#custom-browser,
-#custom-file,
-#custom-setting,
-#custom-spotify,
-#window,
+#clock,
 #workspaces,
-#tray,
-#network,
-#bluetooth,
-#cpu,
-#memory,
-#temperature,
-#pulseaudio,
-#backlight,
-#battery,
-#clock {
-  background-color: rgba(46, 52, 64, 0.75);
-}
+#mpris,
+#systray,
+#audio,
+#brightness,
+#hardware,
+#powermenu {
+  background-color: alpha(@bg, 0.85);
+  color: @fg;
 
-#custom-rofi,
-#custom-dunst,
-#custom-browser,
-#custom-file,
-#custom-setting,
-#custom-spotify,
-#window,
-#tray,
-#network,
-#bluetooth,
-#cpu,
-#memory,
-#temperature,
-#pulseaudio,
-#backlight,
-#battery,
-#clock {
+  margin: 0px 0px 0px 5px;
   padding: 0px 5px 0px 5px;
-}
 
-#workspaces button {
-  padding: 0px 7.5px 0px 7.5px;
-}
-
-#custom-rofi,
-#tray,
-#cpu {
-  border: none;
-  border-radius: 5px 0px 0px 5px;
-}
-
-#custom-setting,
-#bluetooth,
-#battery {
-  border: none;
-  border-radius: 0px 5px 5px 0px;
-}
-
-#custom-spotify,
-#window,
-#workspaces,
-#clock {
   border: none;
   border-radius: 5px;
 }
 
-#custom-setting,
-#custom-spotify,
-#window,
-#bluetooth,
-#battery {
-  margin: 0px 5px 0px 0px;
+label.module {
+  padding: 0px 3px 0px 3px;
+}
+
+#tray {
+  padding: 0px 6px 0px 3px;
+}
+
+#workspaces {
+  padding: 0;
+}
+
+#workspaces button {
+  padding: 0px 10px 0px 3px;
+  border-radius: 5px;
 }
 
 #workspaces button.active {
-  background: rgba(229, 233, 240, 0.1);
+  color: @blue;
+}
+
+#workspaces button:hover {
+  background-color: @sel;
+}
+
+#pulseaudio-slider slider,
+#backlight-slider slider {
+  min-height: 0px;
+  min-width: 0px;
+}
+
+#pulseaudio-slider trough,
+#backlight-slider trough {
+  background-color: lighter(@sel);
+  min-width: 40px;
+  min-height: 2px;
+}
+
+#pulseaudio-slider highlight,
+#backlight-slider highlight {
+  background-color: @cyan;
+  min-width: 10px;
+  min-height: 2px;
 }
 
 #battery.warning {
@@ -121,4 +104,25 @@ window {
 
 #temperature.critical {
   color: @red;
+}
+
+#powermenu {
+  background-color: alpha(@red, 0.85);
+  padding: 0;
+}
+
+#custom-poweroff,
+#custom-reboot,
+#custom-lock,
+#custom-logout {
+  padding: 1px 10px 0px 9px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+#custom-poweroff:hover,
+#custom-reboot:hover,
+#custom-lock:hover,
+#custom-logout:hover {
+  background-color: alpha(lighter(@red), 0.85);
 }

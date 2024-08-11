@@ -1,0 +1,38 @@
+{
+  "ui": {
+    "anchors": {
+      "top": false,
+      "bottom": false,
+      "left": false,
+      "right": false
+    },
+    "ignore_exclusive": true,
+    "fullscreen": false,
+    "window": {
+      "box": {
+        "h_align": "center",
+        "v_align": "center",
+        "orientation": "vertical",
+        "scroll": {
+          "list": {
+            "margin": {
+              "top": 0,
+              "bottom": 0,
+              "left": 5,
+              "right": 5
+            },
+            "max_height": 500,
+            "min_height": 500,
+            "item": {
+              "icon": {
+                "icon_size": "inherit",
+                "pixel_size": 35
+              }
+            },
+            "always_show": true
+          }
+        }
+      }
+    }
+  }
+}

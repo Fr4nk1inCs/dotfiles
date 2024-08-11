@@ -18,16 +18,16 @@ INTERVAL=300
 sleep 1s
 
 while true; do
-	find "$dir" |
-		while read -r img; do
-			if [[ "$img" == "$dir" ]]; then
-				continue
-			fi
-			echo "$((RANDOM % 1000)):$img"
-		done |
-		sort -n | cut -d':' -f2- |
-		while read -r img; do
-			swww img "$img"
-			sleep $INTERVAL
-		done
+    find "$dir" |
+        while read -r img; do
+            if [[ "$img" == "$dir" ]]; then
+                continue
+            fi
+            echo "$((RANDOM % 1000)):$img"
+        done |
+        sort -n | cut -d':' -f2- |
+        while read -r img; do
+            swww img "$img"
+            sleep $INTERVAL
+        done
 done

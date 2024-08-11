@@ -1,0 +1,55 @@
+{
+  "theme": "nordfox",
+  "list": {
+    "cycle": true,
+    "max_entries": 50,
+    "show_initial_entries": true,
+    "single_click": true
+  },
+  "search": {
+    "delay": 0,
+    "force_keyboard_focus": true,
+    "placeholder": "Search..."
+  },
+  "builtins": {
+    "applications": {
+      "history": true,
+      "actions": true,
+      "prioritize_new": true
+    },
+    "clipboard": {
+      "image_height": 300,
+      "max_entries": 1000,
+      "switcher_only": true
+    },
+    "commands": {
+      "switcher_only": true
+    },
+    "emojis": {
+      "history": true,
+      "switcher_only": true,
+      "typeahead": true
+    },
+    "finder": {
+      "switcher_only": true
+    },
+    "hyprland": {
+      "context_aware_history": true
+    },
+    "runner": {
+      "generic_entry": false,
+      "history": true,
+      "typeahead": true
+    },
+    "ssh": {
+      "history": true,
+      "switcher_only": true
+    },
+    "switcher": {
+      "prefix": "/"
+    },
+    "websearch": {
+      "engines": ["google"]
+    }
+  }
+}
